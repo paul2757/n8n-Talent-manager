@@ -1,0 +1,36 @@
+manager de talente
+
+*primesc emailuri*
+
+AI summary 
+Generez un posibil raspuns
+
+
+
+
+
+
+
+
+Poveste: 
+
+Am oameni care au nevoie de persoane publice/un anume artist sa le promoveze produsele sau sa vina la evenimente.
+Verific cine/daca este disponibil in google calendar.
+Negociam pe cine doresc.
+Trimit tarifele artistilor.
+Trimit mai departe oferta.
+Daca artistul accepta oferta, notez in calendar.
+Emit factura.
+
+
+
+Primirea unui email va fi trigger ul.
+Un LLM analizeaza mesajul primit si ofera: 
+    un rezumat, 
+    o sugesteíe de raspuns, 
+    si valideaza daca data respectiva este libera pentru artistul respectiv.
+
+
+Trimit automat un mail cu tarifele artistului.
+Daca primesc de confirmare de la client -> trimit automat mail la artist cu detaliile. 
+Daca accepta -> clientul plateste si emit factura 

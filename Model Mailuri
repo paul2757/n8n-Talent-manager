@@ -1,0 +1,84 @@
+Refuz Artist 
+
+Către:,,{{ $json.EMAIL_CLIENT }}
+Subiect:,Re: Solicitarea dumneavoastră pentru evenimentul din {{ $json.DATA_EVENIMENT }},
+Corp:,"Stimate/Stimată {{ $json.NUME_CLIENT }} (dacă este extras),Vă mulțumim pentru interesul acordat și pentru cererea de booking. Am primit solicitarea dumneavoastră pentru artistul {{ $json.ARTIST_SOLICITAT }} la data de {{ $json.DATA_EVENIMENT }}.Dorim să vă informăm că, momentan, nu administrăm booking-urile pentru acest artist. Vă putem recomanda, în schimb, alți artiști din portofoliul nostru care ar fi disponibili pentru evenimentul dumneavoastră.Vă rugăm să ne contactați sau să răspundeți la acest email dacă doriți să vă trimitem sugestii.Cu stimă,Echipa [Numele Agenției]","{{ $json.ARTIST_SOLICITAT }}, {{ $json.DATA_EVENIMENT }}"
+
+
+
+Solicitare Aprobare Artist
+
+Către:,,{{ $json.ADRESA_EMAIL_ARTIST }} (din DB Tarife)
+Subiect:,BOOKING NOU: Solicitare eveniment pentru {{ $json.DATA_EVENIMENT }},
+Corp:,"Bună {{ $json.ARTIST_FINAL }} (prenume),Avem o solicitare fermă de booking pentru dumneavoastră la data de {{ $json.DATA_EVENIMENT }}.Detalii Sumare:* ID Ofertă: {{ $json.ID_OFERTA }}* Data: {{ $json.DATA_EVENIMENT }}* Locație/Client: {{ $json.DETALII_LOCATIE }} (dacă sunt extrase)Vă rugăm să ne comunicați urgența decizia (Accept/Refuz) Răspunzând pe Telegram (sau pe acest email, dacă ați fi ales emailul ca metodă de răspuns).Dacă acceptați, trimitem oferta clientului imediat.Mulțumim,Echipa Booking","{{ $json.ID_OFERTA }}, {{ $json.DATA_EVENIMENT }}, {{ $json.ARTIST_FINAL }}"
+
+
+Ofertă Formală Client
+
+Către:,,{{ $json.EMAIL_CLIENT }}
+Subiect:,CONFIRMARE DISPONIBILITATE: Oferta pentru {{ $json.ARTIST_FINAL }} la {{ $json.DATA_EVENIMENT }},
+Corp:,"Stimate/Stimată {{ $json.NUME_CLIENT }},Suntem încântați să vă confirmăm că artistul {{ $json.ARTIST_FINAL }} este disponibil la data de {{ $json.DATA_EVENIMENT }}.Oferta noastră fermă, incluzând tariful și termenii standard, este următoarea:💰 Tarif Booking: {{ $json.TARIF_OFERTA }} Euro (sau Lei)📝 Termeni Esențiali: {{ $json.TERMENI_CONTRACTUALI }} (preluat din DB Tarife)Vă rugăm să ne confirmați acceptul dumneavoastră răspunzând la acest email. Odată ce primim confirmarea (Pasul 11), vom genera automat factura și vom bloca definitiv data.Cu respect,Echipa [Numele Agenției]","{{ $json.ARTIST_FINAL }}, {{ $json.DATA_EVENIMENT }}, {{ $json.TARIF_OFERTA }}, {{ $json.TERMENI_CONTRACTUALI }}"
+
+
+Notificare Finalizare & Factură
+
+Către:,,{{ $json.EMAIL_CLIENT }}
+Subiect:,REZERVARE CONFIRMATĂ! Factura {{ $json.ID_FACTURA }} atașată.,
+Corp:,"Felicitări {{ $json.NUME_CLIENT }},Vă confirmăm cu bucurie că booking-ul pentru {{ $json.ARTIST_FINAL }} la data de {{ $json.DATA_EVENIMENT }} este FINALIZAT și marcat în calendar.Datele evenimentului sunt rezervate exclusiv pentru dumneavoastră.Vă rugăm să găsiți atașată Factura cu seria și numărul {{ $json.ID_FACTURA }} și să respectați termenul de plată. Toate detaliile sunt în document.Vă mulțumim și vă dorim un eveniment de succes!Echipa [Numele Agenției]","{{ $json.ARTIST_FINAL }}, {{ $json.DATA_EVENIMENT }}, {{ $json.ID_FACTURA }}"
+
+
+Notificare Anulare
+
+Către:,,{{ $json.EMAIL_CLIENT }}
+Subiect:,Urmare a ofertei pentru {{ $json.ARTIST_FINAL }} la data de {{ $json.DATA_EVENIMENT }},
+Corp:,"Stimate/Stimată {{ $json.NUME_CLIENT }},Am înregistrat decizia dumneavoastră de a nu continua cu oferta pentru artistul {{ $json.ARTIST_FINAL }} la data de {{ $json.DATA_EVENIMENT }}.Înțelegem, și dorim să vă asigurăm că rămânem la dispoziția dumneavoastră pentru orice alte evenimente viitoare.Vă mulțumim pentru timpul acordat.Cu respect,Echipa [Numele Agenției]","{{ $json.ARTIST_FINAL }}, {{ $json.DATA_EVENIMENT }}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+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
+
+
+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
+
+
+
+
+
+
+

@@ -1,0 +1,90 @@
+################################################################################
+# PROMPTURI LLM PENTRU PROIECTUL "TALENT MANAGER" (n8n Integration)
+################################################################################
+
+# ROL: Esti un expert in procesarea limbajului natural (NPL) si extragerea datelor structurate.
+# Sarcina ta este sa analizezi textul primit si sa returnezi OBLIGATORIU un obiect JSON cu structura specificata.
+# ORICE rezultat non-JSON va fi considerat un esec.
+
+################################################################################
+# PROMPT 1: EXTRAGERE DATE STRUCTURATE DIN CEREREA INITIALA (Pasul 2)
+################################################################################
+
+# INPUT: Corpul email-ului de cerere primit de la client.
+
+# INSTRUCTIUNI:
+# 1. Analizeaza textul si extrage informatiile solicitate in campurile JSON.
+# 2. Campul 'DATA_EVENIMENT' trebuie sa fie convertit in format ISO 8601 (YYYY-MM-DD), daca este mentionata o zi, luna si an. Daca lipseste anul, foloseste anul curent (2025). Daca lipsesc informatii, returneaza "UNKNOWN".
+# 3. Campul 'ARTIST_SOLICITAT' trebuie sa fie un singur nume/nume de scena, daca este mentionat.
+# 4. Campul 'NUME_CLIENT' trebuie sa fie numele persoanei care a semnat sau a trimis emailul.
+
+# SCHEMA DE OUTPUT (JSON OBLIGATORIU):
+# {
+#   "ARTIST_SOLICITAT": "string",
+#   "DATA_EVENIMENT": "string (YYYY-MM-DD)",
+#   "NUME_CLIENT": "string",
+#   "DETALII_LOCATIE": "string (Descriere scurta a locatiei sau a evenimentului, max 30 de cuvinte)"
+# }
+
+# EXEMPLU DE TEXT INPUT:
+# "Buna ziua,
+# Va scriu pentru o cerere de booking. As vrea sa il rezerv pe DJ Cosmic pentru un eveniment privat in data de 15 Martie 2026. Este o petrecere corporate la Club A din Bucuresti.
+# Multumesc,
+# Ion Popescu"
+ 
+# EXEMPLU DE OUTPUT DORIT (JSON):
+# {
+#   "ARTIST_SOLICITAT": "DJ Cosmic",
+#   "DATA_EVENIMENT": "2026-03-15",
+#   "NUME_CLIENT": "Ion Popescu",
+#   "DETALII_LOCATIE": "Petrecere corporate la Club A din Bucuresti"
+# }
+
+---
+
+################################################################################
+# PROMPT 2: VALIDARE ARTIST MENȚIONAT (Pasul 4)
+################################################################################
+
+# INPUT: Numele artistului extras de LLM (ARTIST_SOLICITAT) la Pasul 2.
+
+# INSTRUCTIUNI:
+# 1. Analizeaza campul 'ARTIST_SOLICITAT'.
+# 2. Daca valoarea este "UNKNOWN", "N/A", "nu stiu", sau un text care indica in mod clar ca NU a fost specificat un artist (indiferent de textul original), incadreaza intentia ca "FARA_ARTIST".
+# 3. Daca valoarea este un nume de scena sau un nume real (ex: "DJ Cosmic", "Andrei", "Trupa X"), incadreaza intentia ca "ARTIST_SPECIFICAT".
+
+# SCHEMA DE OUTPUT (JSON OBLIGATORIU):
+# {
+#   "INTENTIE_ARTIST": "string (Valori posibile: ARTIST_SPECIFICAT sau FARA_ARTIST)"
+# }
+
+# EXEMPLU DE INPUT: "DJ Cosmic"
+# EXEMPLU DE OUTPUT DORIT (JSON): { "INTENTIE_ARTIST": "ARTIST_SPECIFICAT" }
+
+# EXEMPLU DE INPUT: "UNKNOWN"
+# EXEMPLU DE OUTPUT DORIT (JSON): { "INTENTIE_ARTIST": "FARA_ARTIST" }
+
+---
+
+################################################################################
+# PROMPT 3: CLASIFICARE RĂSPUNS ARTIST SAU CLIENT (Pasul 9 & Pasul 11)
+################################################################################
+
+# INPUT: Textul de raspuns primit de la Artist (Telegram) sau de la Client (Email).
+
+# INSTRUCTIUNI:
+# 1. Analizeaza tonul si cuvintele cheie din text.
+# 2. Clasifica raspunsul in una din cele doua categorii.
+# 3. Clasificarea trebuie sa fie "POZITIV" doar daca exista un accept ferm (ex: "ok", "confirm", "merge", "sunt in regula", "accept oferta").
+# 4. Clasificarea trebuie sa fie "NEGATIV" daca exista un refuz ferm (ex: "nu pot", "refuz", "nu", "nu e bine", "anulati").
+
+# SCHEMA DE OUTPUT (JSON OBLIGATORIU):
+# {
+#   "CLASIFICARE": "string (Valori posibile: POZITIV sau NEGATIV)"
+# }
+
+# EXEMPLU DE TEXT INPUT: "Salut, oferta e ok pentru mine, confirm. Trimite-le actele."
+# EXEMPLU DE OUTPUT DORIT (JSON): { "CLASIFICARE": "POZITIV" }
+
+# EXEMPLU DE TEXT INPUT: "Nu, din pacate nu pot veni in acea data. Anulati, va rog."
+# EXEMPLU DE OUTPUT DORIT (JSON): { "CLASIFICARE": "NEGATIV" }
